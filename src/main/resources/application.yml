@@ -27,3 +27,6 @@ spring:
           uri: lb://UNIQUONE-CHAT-SERVICE
           predicates:
             - Path=/chat/**
+jenkins:
+  docker-id: ${DOCKERHUB_ID}
+  docker-pw: ${DOCKERHUB_PW}

@@ -2,10 +2,30 @@ plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
+	id 'com.google.cloud.tools.jib' version '3.3.0'
 }
 
 jar {
 	enabled = false
+}
+jib {
+	from {
+		auth {
+			username = System.getenv("DOCKERHUB_ID")
+			password = System.getenv("DOCKERHUB_PW")
+		}
+	}
+	to {
+		image = "bum090877/uniquone_msa_gateway"
+		tags = ['latest']
+		auth {
+			username = System.getenv("DOCKERHUB_ID")
+			password = System.getenv("DOCKERHUB_PW")
+		}
+	}
+	container {
+
+	}
 }
 
 group = 'com.sparos.uniquone'
