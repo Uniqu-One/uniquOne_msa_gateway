@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      uri: ${UNI_CONFIG_URI}
+      name: ${UNI_CONFIG_USER}
