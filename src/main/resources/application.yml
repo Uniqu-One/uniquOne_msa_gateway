@@ -73,6 +73,9 @@ spring:
           uri: lb://UNIQUONE-POST-SERVICE
           predicates:
             - Path=/posts/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/posts/(?<segment>.*), /$\{segment}
         - id: chat-service
           uri: lb://UNIQUONE-CHAT-SERVICE
           predicates:
