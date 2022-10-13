@@ -18,7 +18,7 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-#            allowedOrigins: "http://10.10.10.138:3000"
+            allowedOriginPatterns: "*"
             allow-credentials: true   #추가
             allowedHeaders:
               - x-requested-with
