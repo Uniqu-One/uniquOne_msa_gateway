@@ -15,6 +15,24 @@ spring:
 
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+#            allowedOrigins: "http://10.10.10.138:3000"
+            allow-credentials: true   #추가
+            allowedHeaders:
+              - x-requested-with
+              - authorization
+              - content-type
+              - credential
+              - X-AUTH-TOKEN
+              - X-CSRF-TOKEN
+            allowedMethods:
+              - POST
+              - GET
+              - PUT
+              - OPTIONS
+              - DELETE
       routes:
 #        #Swagger
 #        - id: user-service
@@ -29,15 +47,14 @@ spring:
           uri: lb://UNIQUONE-USER-SERVICE
           predicates:
             - Path=/oauth2/**
-          filters:
-            - RemoveRequestHeader=Cookie
+#            - RemoveRequestHeader=Cookie
         #Test auth2
         - id: user-service
           uri: lb://UNIQUONE-USER-SERVICE
           predicates:
             - Path=/login/**
-          filters:
-            - RemoveRequestHeader=Cookie
+#          filters:
+#            - RemoveRequestHeader=Cookie
 #       auth
         - id: user-service
           uri: lb://UNIQUONE-USER-SERVICE
