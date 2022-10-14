@@ -6,8 +6,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://127.0.0.1:8761/eureka
-#      defaultZone: http://eureka-server:8761/eureka
+      defaultZone: ${EUREKA_SERVER}
 
 spring:
   application:
@@ -15,7 +14,46 @@ spring:
 
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allow-credentials: true   #추가
+            allowedHeaders:
+              - x-requested-with
+              - authorization
+              - content-type
+              - credential
+              - X-AUTH-TOKEN
+              - X-CSRF-TOKEN
+            allowedMethods:
+              - POST
+              - GET
+              - PUT
+              - OPTIONS
+              - DELETE
       routes:
+#        #Swagger
+#        - id: user-service
+#          uri: lb://UNIQUONE-USER-SERVICE
+#          predicates:
+#            - Path=/users/**
+#          filters:
+#            - RemoveRequestHeader=Cookie
+#            - RewritePath=/users/(?<segment>.*), /$\{segment}
+        #Test oauth2 athication
+        - id: user-service
+          uri: lb://UNIQUONE-USER-SERVICE
+          predicates:
+            - Path=/oauth2/**
+#            - RemoveRequestHeader=Cookie
+        #Test auth2
+        - id: user-service
+          uri: lb://UNIQUONE-USER-SERVICE
+          predicates:
+            - Path=/login/**
+#          filters:
+#            - RemoveRequestHeader=Cookie
 #       auth
         - id: user-service
           uri: lb://UNIQUONE-USER-SERVICE
