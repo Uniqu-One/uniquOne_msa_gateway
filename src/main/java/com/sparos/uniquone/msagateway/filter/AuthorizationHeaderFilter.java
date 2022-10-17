@@ -1,6 +1,6 @@
 package com.sparos.uniquone.msagateway.filter;
 
-import io.jsonwebtoken.Jwts;
+import com.sparos.uniquone.msagateway.utils.JwtProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -36,6 +36,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         return ((exchange, chain) -> {
             //토큰에 관한 검사 처리.
             ServerHttpRequest request = exchange.getRequest();
+            ServerHttpResponse response = exchange.getResponse();
 //            ServerHttpResponse response = exchange.getResponse();
             //토큰이 없다면!
             if(!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)){
@@ -48,39 +49,22 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
             String jwt = authorizationHeader.replace("Bearer", "");
 
             //토큰 검증.
-            if(!isJwtValid(jwt)){
+//            if(!isJwtValid(jwt)){
+            if(!JwtProvider.isJwtValid(jwt)){
                 return onError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
             }
+//            String token = request.getQueryParams().get("token").get(0);
+//            String userRoleByRequest = JwtProvider.getUserRoleByRequest(request);
+//            if(userRoleByRequest.equals("ROLE_USER")){
+//                response.setStatusCode(HttpStatus.PERMANENT_REDIRECT);
+//                response.getHeaders().setLocation(URI.create("/login"));
+//                response.setComplete();
+//            }
 
             return chain.filter(exchange);
         });
     }
 
-    private boolean isJwtValid(String jwt) {
-        boolean returnValue = true;
-
-        //jwt 안에는 subject 가 존재.
-        String subject = null;
-
-        //토큰 만들때 어떤 방식으로 만들었는지 일치 시켜줘야함(signingKey
-        //복호화 할 대상지정(parseClaimsJws)
-        //Subject화. 그러면 여기서는 유저의 아이디가 나올거임.
-        try{
-            subject = Jwts.parser().setSigningKey(env.getProperty("token.secret"))
-                    .parseClaimsJws(jwt).getBody()
-                    .getSubject();
-        } catch (Exception ex){
-            returnValue = false;
-        }
-
-        if(subject == null || subject.isEmpty()){
-            returnValue = false;
-        }
-
-
-        //따짐.
-        return returnValue;
-    }
 
     private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
 //        ServerHttpResponse response = exchange.getResponse();

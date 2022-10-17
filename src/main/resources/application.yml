@@ -31,6 +31,7 @@ spring:
               - POST
               - GET
               - PUT
+              - PATCH
               - OPTIONS
               - DELETE
       routes:
@@ -62,6 +63,16 @@ spring:
             - Path=/auth/**
           filters:
             - RemoveRequestHeader=Cookie
+        #  회원가입, 로그인 외 애
+        - id: user-service
+          uri: lb://UNIQUONE-USER-SERVICE
+          predicates:
+            - Path=/users/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/users/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
 #        회원가입.
         - id: user-service
           uri: lb://UNIQUONE-USER-SERVICE
@@ -76,16 +87,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/users/(?<segment>.*), /$\{segment}
-        #  회원가입, 로그인 외 애
-        - id: user-service
-          uri: lb://UNIQUONE-USER-SERVICE
-          predicates:
-            - Path=/users/**
-            - Method=GET
-          filters:
-            - RemoveRequestHeader=Cookie
-            - RewritePath=/users/(?<segment>.*), /$\{segment}
-#            - AuthorizationHeaderFilter
+
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
           predicates:
