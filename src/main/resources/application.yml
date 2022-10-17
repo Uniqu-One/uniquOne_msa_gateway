@@ -33,6 +33,7 @@ spring:
               - PUT
               - OPTIONS
               - DELETE
+              - PATCH
       routes:
 #        #Swagger
 #        - id: user-service
