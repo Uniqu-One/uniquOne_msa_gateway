@@ -6,7 +6,6 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-#      defaultZone: http://127.0.0.1:8761/eureka
       defaultZone: ${EUREKA_SERVER}
 
 spring:
@@ -16,8 +15,11 @@ spring:
   cloud:
     gateway:
       globalcors:
+        default-filters:
+          - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
         cors-configurations:
           '[/**]':
+#            allowedOrigins: "*"
             allowedOriginPatterns: "*"
             allow-credentials: true   #추가
             allowedHeaders:
@@ -34,6 +36,7 @@ spring:
               - PATCH
               - OPTIONS
               - DELETE
+              - PATCH
       routes:
 #        #Swagger
 #        - id: user-service
@@ -95,6 +98,14 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/posts/(?<segment>.*), /$\{segment}
+        # 리뷰
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/reviews/**
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/reviews/(?<segment>.*), /$\{segment}
         - id: chat-service
           uri: lb://UNIQUONE-CHAT-SERVICE
           predicates:
