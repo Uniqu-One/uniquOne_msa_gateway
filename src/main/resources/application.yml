@@ -105,7 +105,13 @@ spring:
             - Path=/reviews/**
           filters:
             - RemoveRequestHeader=Cookie
-            - RewritePath=/reviews/(?<segment>.*), /$\{segment}
+        # 거래
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/trade/**
+          filters:
+            - RemoveRequestHeader=Cookie
         - id: chat-service
           uri: lb://UNIQUONE-CHAT-SERVICE
           predicates:
