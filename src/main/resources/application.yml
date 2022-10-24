@@ -90,7 +90,6 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/users/(?<segment>.*), /$\{segment}
-
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
           predicates:
@@ -98,6 +97,13 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/posts/(?<segment>.*), /$\{segment}
+#        콘
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/corns/**
+          filters:
+            - RemoveRequestHeader=Cookie
         # 리뷰
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
@@ -106,6 +112,13 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/reviews/(?<segment>.*), /$\{segment}
+        # 공통 정보. (1.토큰 던졌을때 유저 pkId ,유저 CornId)
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/commons/**
+          filters:
+            - RemoveRequestHeader=Cookie
 #        Post Comment
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
