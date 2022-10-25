@@ -98,20 +98,14 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/posts/(?<segment>.*), /$\{segment}
-        # 리뷰
+        # 리뷰, 거래, 문의, 어드민, 신고, 알림
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
           predicates:
-            - Path=/reviews/**
+            - Path=/reviews/**, /trade/**, /qna/**, /admin/**, /report/**, /noti/**
           filters:
             - RemoveRequestHeader=Cookie
-        # 거래
-        - id: post-service
-          uri: lb://UNIQUONE-POST-SERVICE
-          predicates:
-            - Path=/trade/**
-          filters:
-            - RemoveRequestHeader=Cookie
+
         - id: chat-service
           uri: lb://UNIQUONE-CHAT-SERVICE
           predicates:
