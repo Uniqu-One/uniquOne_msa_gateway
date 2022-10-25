@@ -90,7 +90,6 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/users/(?<segment>.*), /$\{segment}
-
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
           predicates:
@@ -103,9 +102,35 @@ spring:
           uri: lb://UNIQUONE-POST-SERVICE
           predicates:
             - Path=/reviews/**, /trade/**, /qna/**, /admin/**, /report/**, /noti/**
+#        콘
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/corns/**
           filters:
             - RemoveRequestHeader=Cookie
-
+        # 공통 정보. (1.토큰 던졌을때 유저 pkId ,유저 CornId)
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/commons/**
+          filters:
+            - RemoveRequestHeader=Cookie
+#        Post Comment
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/comment/**
+          filters:
+            - RemoveRequestHeader=Cookie
+#            - AuthorizationHeaderFilter
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/search/**
+          filters:
+            - RemoveRequestHeader=Cookie
+#            - AuthorizationHeaderFilter
         - id: chat-service
           uri: lb://UNIQUONE-CHAT-SERVICE
           predicates:
