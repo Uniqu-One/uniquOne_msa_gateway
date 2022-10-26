@@ -20,7 +20,7 @@ spring:
         cors-configurations:
           '[/**]':
 #            allowedOrigins: "*"
-            allowedOriginPatterns: "*"
+#            allowedOriginPatterns: "*"
             allow-credentials: true   #추가
             allowedHeaders:
               - x-requested-with
@@ -36,7 +36,7 @@ spring:
               - PATCH
               - OPTIONS
               - DELETE
-              - PATCH
+
       routes:
 #        #Swagger
 #        - id: user-service
