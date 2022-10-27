@@ -14,7 +14,7 @@ spring:
 
   cloud:
     gateway:
-      defa  ult-filters:
+      default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
       globalcors:
         cors-configurations:
