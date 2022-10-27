@@ -15,14 +15,12 @@ spring:
   cloud:
     gateway:
       globalcors:
-        default-filters:
-          - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
         cors-configurations:
           '[/**]':
-#            allowedOrigins: "*"
-            allowedOriginPatterns: "*"
-            allow-credentials: true   #추가
-            allowedHeaders: "*"
+            allowed-origins:
+              - "http://localhost:3000"
+            allowedHeaders:
+              - "*"
             allowedMethods:
               - POST
               - GET
@@ -30,6 +28,7 @@ spring:
               - PATCH
               - OPTIONS
               - DELETE
+            allow-credentials: true
 
       routes:
 #        #Swagger
@@ -86,6 +85,7 @@ spring:
             - Path=/signup/**
           filters:
             - RemoveRequestHeader=Cookie
+
         - id: user-service
           uri: lb://UNIQUONE-USER-SERVICE
           predicates:

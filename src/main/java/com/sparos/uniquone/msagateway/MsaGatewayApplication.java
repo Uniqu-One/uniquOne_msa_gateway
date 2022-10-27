@@ -20,27 +20,4 @@ public class MsaGatewayApplication {
 		SpringApplication.run(MsaGatewayApplication.class, args);
 	}
 
-	@Bean
-	public CorsConfigurationSource corsConfigurationSource() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration corsConfiguration = new CorsConfiguration();
-		corsConfiguration.addAllowedHeader("*");
-		corsConfiguration.addAllowedOriginPattern("*");
-		corsConfiguration.addAllowedMethod("*");
-		corsConfiguration.setAllowCredentials(true);
-		source.registerCorsConfiguration("/**", corsConfiguration);
-
-//		corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
-//		corsConfiguration.setMaxAge(3600L);
-//		corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST","PATCH","OPTIONS","DELETE"));
-//		corsConfiguration.addAllowedHeader("*");
-//		source.registerCorsConfiguration("/**", corsConfiguration);
-		return source;
-	}
-
-	@Bean
-	public CorsWebFilter corsWebFilter() {
-		return new CorsWebFilter(corsConfigurationSource());
-	}
-
 }
