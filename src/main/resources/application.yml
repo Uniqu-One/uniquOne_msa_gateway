@@ -60,6 +60,15 @@ spring:
             - Path=/auth/**
           filters:
             - RemoveRequestHeader=Cookie
+            -
+        - id: user-service
+            uri: lb://UNIQUONE-USER-SERVICE
+            predicates:
+              - Path=/feignUser/**
+            filters:
+              - RemoveRequestHeader=Cookie
+              - RewritePath=/feignUser/(?<segment>.*), /$\{segment}
+
         #  회원가입, 로그인 외 애
         - id: user-service
           uri: lb://UNIQUONE-USER-SERVICE
