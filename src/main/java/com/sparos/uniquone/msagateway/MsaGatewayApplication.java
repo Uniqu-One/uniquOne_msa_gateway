@@ -24,17 +24,17 @@ public class MsaGatewayApplication {
 	public CorsConfigurationSource corsConfigurationSource() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
-//		corsConfiguration.addAllowedHeader("*");
-//		corsConfiguration.addAllowedOrigin("http://localhost:3000");
-//		corsConfiguration.addAllowedMethod("*");
-//		corsConfiguration.setAllowCredentials(true);
-//		source.registerCorsConfiguration("/**", corsConfiguration);
-
-		corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
-		corsConfiguration.setMaxAge(3600L);
-		corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST","PATCH","OPTIONS","DELETE"));
 		corsConfiguration.addAllowedHeader("*");
+		corsConfiguration.addAllowedOrigin("http://localhost:3000");
+		corsConfiguration.addAllowedMethod("*");
+		corsConfiguration.setAllowCredentials(true);
 		source.registerCorsConfiguration("/**", corsConfiguration);
+
+//		corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
+//		corsConfiguration.setMaxAge(3600L);
+//		corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST","PATCH","OPTIONS","DELETE"));
+//		corsConfiguration.addAllowedHeader("*");
+//		source.registerCorsConfiguration("/**", corsConfiguration);
 		return source;
 	}
 

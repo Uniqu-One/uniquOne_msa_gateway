@@ -15,11 +15,11 @@ spring:
   cloud:
     gateway:
       globalcors:
-#        default-filters:
-#          - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+        default-filters:
+          - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
         cors-configurations:
           '[/**]':
-            allowedOrigins: "*"
+#            allowedOrigins: "*"
 #            allowedOriginPatterns: "*"
             allow-credentials: true   #추가
             allowedHeaders: "*"
