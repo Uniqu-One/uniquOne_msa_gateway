@@ -22,13 +22,7 @@ spring:
 #            allowedOrigins: "*"
 #            allowedOriginPatterns: "*"
             allow-credentials: true   #추가
-            allowedHeaders:
-              - x-requested-with
-              - authorization
-              - content-type
-              - credential
-              - X-AUTH-TOKEN
-              - X-CSRF-TOKEN
+            allowedHeaders: "*"
             allowedMethods:
               - POST
               - GET
