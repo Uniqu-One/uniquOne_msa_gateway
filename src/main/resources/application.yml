@@ -20,7 +20,7 @@ spring:
         cors-configurations:
           '[/**]':
 #            allowedOrigins: "*"
-#            allowedOriginPatterns: "*"
+            allowedOriginPatterns: "*"
             allow-credentials: true   #추가
             allowedHeaders: "*"
             allowedMethods:
@@ -93,6 +93,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/users/(?<segment>.*), /$\{segment}
+
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
           predicates:
