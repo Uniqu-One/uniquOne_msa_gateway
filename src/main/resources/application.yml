@@ -91,11 +91,11 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/posts/(?<segment>.*), /$\{segment}
-        # 리뷰, 거래, 문의, 어드민, 신고, 알림
+        # 리뷰, 거래, 문의, 어드민, 신고, 알림, 오퍼
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
           predicates:
-            - Path=/reviews/**, /trade/**, /qna/**, /admin/**, /report/**, /noti/**
+            - Path=/reviews/**, /trade/**, /qna/**, /admin/**, /report/**, /noti/**, /offer/**
 #        콘
         - id: post-service
           uri: lb://UNIQUONE-POST-SERVICE
