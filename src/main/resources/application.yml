@@ -56,6 +56,13 @@ spring:
             - Path=/login/**
 #          filters:
 #            - RemoveRequestHeader=Cookie
+        #       Test oauth2
+        - id: user-service
+          uri: lb://UNIQUONE-USER-SERVICE
+          predicates:
+            - Path=/api/**
+          filters:
+#            - RemoveRequestHeader=Cookie
 #       auth
         - id: user-service
           uri: lb://UNIQUONE-USER-SERVICE
