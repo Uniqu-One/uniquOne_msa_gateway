@@ -49,10 +49,6 @@ spring:
         - id: user-service
           uri: lb://UNIQUONE-USER-SERVICE
           predicates:
-            - Path=/Oauth2/**
-        - id: user-service
-          uri: lb://UNIQUONE-USER-SERVICE
-          predicates:
             - Path=/oauth2/**
 #            - RemoveRequestHeader=Cookie
         #Test auth2
