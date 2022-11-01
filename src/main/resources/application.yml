@@ -22,8 +22,8 @@ spring:
             allowed-origins:
               - "http://localhost:3000"
               - "http://13.125.66.71:3000"
-              - "http://www.uniquone.shop"
-              - "http://uniquone.shop"
+              - "https://www.uniquone.shop"
+              - "https://uniquone.shop"
             allowedHeaders:
               - "*"
             allowedMethods:
