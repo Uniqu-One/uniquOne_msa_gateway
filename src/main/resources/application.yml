@@ -23,6 +23,7 @@ spring:
               - "http://localhost:3000"
               - "http://13.125.66.71:3000"
               - "http://www.uniquone.shop"
+              - "http://uniquone.shop"
             allowedHeaders:
               - "*"
             allowedMethods:
