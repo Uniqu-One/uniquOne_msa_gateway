@@ -24,6 +24,7 @@ spring:
               - "http://13.125.66.71:3000"
               - "https://www.uniquone.shop"
               - "https://uniquone.shop"
+              - "https://www.uniquone.shop"
             allowedHeaders:
               - "*"
             allowedMethods:
