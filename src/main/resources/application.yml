@@ -25,6 +25,10 @@ spring:
               - "http://10.10.10.143:3000"
               - "http://10.10.10.126:3000"
               - "http://10.10.10.143:7000"
+              - "http://13.125.66.71:3000"
+              - "https://www.uniquone.shop"
+              - "https://uniquone.shop"
+              - "https://www.uniquone.shop"
             allowedHeaders:
               - "*"
             allowedMethods:
@@ -57,6 +61,13 @@ spring:
           predicates:
             - Path=/login/**
 #          filters:
+#            - RemoveRequestHeader=Cookie
+        #       Test oauth2
+        - id: user-service
+          uri: lb://UNIQUONE-USER-SERVICE
+          predicates:
+            - Path=/api/**
+          filters:
 #            - RemoveRequestHeader=Cookie
 #       auth
         - id: user-service
@@ -141,6 +152,13 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie
 #            - AuthorizationHeaderFilter
+        - id: post-service
+          uri: lb://UNIQUONE-POST-SERVICE
+          predicates:
+            - Path=/unistar/**
+          filters:
+            - RemoveRequestHeader=Cookie
+        #            - AuthorizationHeaderFilter
         - id: chat-service
           uri: lb://UNIQUONE-CHAT-SERVICE
           predicates:
