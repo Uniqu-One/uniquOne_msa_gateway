@@ -21,6 +21,10 @@ spring:
           '[/**]':
             allowed-origins:
               - "http://localhost:3000"
+              - "http://localhost:7000"
+              - "http://10.10.10.143:3000"
+              - "http://10.10.10.126:3000"
+              - "http://10.10.10.143:7000"
             allowedHeaders:
               - "*"
             allowedMethods:
